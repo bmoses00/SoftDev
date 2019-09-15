@@ -1,3 +1,5 @@
+# work of Team Brosef
+
 import csv
 import random
 
