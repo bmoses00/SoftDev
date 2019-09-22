@@ -1,6 +1,6 @@
 # Brian Moses
 # SoftDev1 pd 2
-# K #02: NO-body expects the Spanish Inquisition
+# K#02: NO-body expects the Spanish Inquisition
 # 2019-9-10
 
 import random
