@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Your Future Job! </title>
+    </head>
+    <body>
+      <h1> Using our advanced AI, we have
+      determined the perfect job for you!
+    </h1>
+      <h2> US Jobs </h2>
+
+        <h3> These are the most popular occupations in the US </h3>
+        Team Name: Snake Goes Moo <br>
+        Roster: 20
+        <br> <hr>
+        <table style="width:100%">
+        <tr>
+          <th>Job Name</th>
+          <th>Percentage</th>
+        </tr>
+          {% for i, j in collection %}
+              <tr> <td> {{i}} </td> <td> {{j}} </td> </tr>
+          {% endfor %}
+      </table>
+      <hr>
+
+
+
+    </body>
+</html>
