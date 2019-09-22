@@ -1,3 +1,8 @@
+# Brian Moses
+# SoftDev1 pd 2
+# K#03: Know your fam
+# 2019-9-10
+
 from flask import Flask, render_template
 import csv
 import random
