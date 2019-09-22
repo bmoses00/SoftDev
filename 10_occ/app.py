@@ -27,7 +27,7 @@ def selector():  #function to randomly select an occupation
     threshold = 0
     for x, y in OCCUPATIONS.items():
         if(randomValue < (threshold + y)):
-            return x 
+            return x
         else:
             threshold += y
 
@@ -40,8 +40,8 @@ def hello_world():
 
 @app.route("/my_foist_template")
 def foist():
-    return selector() + render_template("my_foist_template.html",
-                           collection = mylist)
+    return ("Your future occupation is: " + selector() + render_template("my_foist_template.html",
+                           collection = mylist))
 
 if __name__ == "__main__":
         app.debug = True
