@@ -1,6 +1,6 @@
 # Brian Moses
 # SoftDev1 pd 2
-# K#03: StI/O: Divine your Destiny!
+# K#06: StI/O: Divine your Destiny!
 # 2019-9-10
 
 import csv
