@@ -7,30 +7,40 @@ from flask import Flask, render_template
 import csv
 import random
 
-
-OCCUPATIONS = {}
-occupations = []
+OCCUPATIONS = []
 PERCENTAGES = []
-mylist = zip(occupations, PERCENTAGES)
+mylist = zip(OCCUPATIONS, PERCENTAGES)
 
-with open('static/occupations.csv') as csv_file:  #open CSV file
-    csv_reader = csv.reader(csv_file, delimiter=',')  #instantiate CSV reader object
-    line_count = 0  #make sure header isn't included in dictionary
-    for row in csv_reader:  #populate dictionary with keys and values
-        if(line_count == 0):
-            line_count += 1
-        else:
-            OCCUPATIONS[row[0]] = float(row[1])
-    OCCUPATIONS.pop("Total")
+file = open("static/occupations.csv", "r") #opens file
+workingList = file.readlines()[1:len(file.readlines())-1] # removes last, first elements of csv
+for job in workingList:
+    job = job.rsplit(",", 1)
+    OCCUPATIONS.append(job[0])
+    PERCENTAGES.append(float(job[1]))
 
-for x, y in OCCUPATIONS.items():
-    PERCENTAGES.append(str(y) + "%")
-    occupations.append(x)
+file.close()
 
-def selector():  #function to randomly select an occupation
+
+# select a value from 0 to 99.8
+# this value is compared to the percentage of the occupation
+# if the value is less than that percent, the job is returned
+# else, threshold is increased by the percentage
+# ------------------------------------------------------------------
+# EX: randomValue = 12
+# 12 < 6.1: FALSE
+# threshold now = 0 + 6.1 = 6.1
+# 12 < 6.1 + 5: FALSE (there was a 5% chance of this happening
+#                      number being > 6.1 and < 11.1. This 5% is
+#                      the percentage of this occupation)
+# threshold now = 6.1 + 5 = 11.1
+# 12 < 11.1 + 2.7: TRUE -> occupation is returned
+def selector():
     randomValue = random.random() * 99.8
     threshold = 0
-    for x, y in OCCUPATIONS.items():
+
+    while ()
+    for (x, y) in mylist:
+        print ("hi")
         if(randomValue < (threshold + y)):
             return x
         else:
@@ -43,7 +53,7 @@ app = Flask(__name__)
 def hello_world():
     return selector()
 
-@app.route("/my_foist_template")
+@app.route("/occupyflaskst")
 def foist():
     return ("Your future occupation is: " + selector() + render_template("my_foist_template.html",
                            collection = mylist))
