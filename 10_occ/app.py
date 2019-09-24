@@ -9,15 +9,16 @@ import random
 
 OCCUPATIONS = []
 PERCENTAGES = []
-mylist = zip(OCCUPATIONS, PERCENTAGES)
 
 file = open("static/occupations.csv", "r") #opens file
 workingList = file.readlines()[1:len(file.readlines())-1] # removes last, first elements of csv
 for job in workingList:
     job = job.rsplit(",", 1)
-    OCCUPATIONS.append(job[0])
+    if (job[0].startswith("\"")): # this removes starting and ending quotes, if there are any
+        OCCUPATIONS.append(job[0][1:len(job[0]) -1])
+    else:
+        OCCUPATIONS.append(job[0])
     PERCENTAGES.append(float(job[1]))
-
 file.close()
 
 
@@ -34,29 +35,30 @@ file.close()
 #                      the percentage of this occupation)
 # threshold now = 6.1 + 5 = 11.1
 # 12 < 11.1 + 2.7: TRUE -> occupation is returned
+
 def selector():
     randomValue = random.random() * 99.8
     threshold = 0
-
-    while ()
-    for (x, y) in mylist:
-        print ("hi")
-        if(randomValue < (threshold + y)):
-            return x
+    i = 0
+    while (i < len(OCCUPATIONS)):
+        if (randomValue < (threshold + PERCENTAGES[i])):
+            return OCCUPATIONS[i]
         else:
-            threshold += y
-
+            threshold += PERCENTAGES[i]
+        i += 1
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return selector()
+    return "You're probably looking for localhost:5000/occupyflaskst"
 
 @app.route("/occupyflaskst")
 def foist():
     return ("Your future occupation is: " + selector() + render_template("my_foist_template.html",
-                           collection = mylist))
+                           collection = zip(OCCUPATIONS, PERCENTAGES)))
+                           # zip packages the two lists together, allowing us to iterate
+                           # through both with one for loop in the template file
 
 if __name__ == "__main__":
         app.debug = True
