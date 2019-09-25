@@ -11,7 +11,7 @@ def auth():
     print(app)
     print(request)
     print(request.args)
-    return "apple"
+    return request.args
 
 @app.route('/index.html')
 def hello_world():
