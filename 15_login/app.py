@@ -11,15 +11,20 @@ def main():
     print("------------------------------------")
     print(session['password'])
     return render_template("index.html",
-                           username = request.form.get('Username'),
-                           password = request.form.get('Password'))
+                           username = request.args.get('Username'),
+                           password = request.args.get('Password'))
 
 @app.route('/auth')
 def authenticate():
-    # print (request.form.get('Username'))
-    print(request.form.get('Username'))
+    print(request.args.get('Username'))
+    print(session['username'])
+    if (request.args.get('Username')) == session['username']:
+        return "nice"
+    else:
+        return "not nice"
     #return redirect("http://www.xkcd.com")
-    return render_template("response.html")
+    # return render_template("response.html")
+    return 'what'
 
 if __name__ == "__main__":
         app.secret_key = os.urandom(32)
