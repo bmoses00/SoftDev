@@ -6,23 +6,23 @@ app = Flask(__name__)
 def main():
     return "Hello"
 
-@app.route('/auth')
+@app.route('/auth', methods = ["POST"])
 def auth():
     print(app)
     print(request)
-    print(request.args)
-    print(request.args["Username"])
+    print(request.form)
+    print(request.form["Username"])
     print("info")
     print(request.headers)
     return render_template("response.html",
-    username = request.args.get('Username'),
+    username = request.form.get('Username'),
     method = request.method)
 
 @app.route('/index.html')
 def hello_world():
     print(app)
     print(request)
-    print(request.args)
+    print(request.form)
     return render_template("index.html")
 
 if __name__ == "__main__":
