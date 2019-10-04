@@ -1,3 +1,8 @@
+# Brian Moses
+# SoftDev pd 2
+# k#16: Oh yes, perhaps I do
+# 10/3/19
+
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 import os
 app = Flask(__name__)
@@ -12,8 +17,13 @@ def main():
     # print(session['password'])
     # if (login):
     #     return render_template("welcome.html", username = request.args.get('Username'))
+
+    # hardcoded username/pass combo
     session['username'] = 'chicken'
     session['password'] = 'portenders'
+    # we use try-catch block to make sure we don't get an error if
+    # session['loggedIn'] is undefined, which it would be if it's the first
+    # time the page had been loaded
     try:
         if session['loggedIn']:
             return render_template("welcome.html", username = session['userUsername'])
@@ -30,6 +40,7 @@ def help():
 
 @app.route('/auth')
 def authenticate():
+    # checks if they entered the right username/pass combo
     if ((request.args.get('Username')) == session['username']
     and request.args.get('Password') == session['password']):
         session['userUsername'] = request.args.get('Username')
@@ -42,7 +53,7 @@ def authenticate():
                              , passwordWrong = request.args.get('Password') != session['password'])
     #return redirect("http://www.xkcd.com")
     # return render_template("response.html")
-    return 'something went wrong'
+    return 'Else did not trigger. Code is wrong.'
 
 if __name__ == "__main__":
         app.secret_key = os.urandom(32)
