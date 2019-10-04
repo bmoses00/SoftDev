@@ -5,7 +5,11 @@
     </head>
     <body>
       <p>
-      {% block content %}
+      {% set msgs = get_flashed_messages() %}
+        {% for each in msgs %}
+          {{each}}
+        {% endfor %}
+      {% block content %} <br>
       Hello, {{username}}! Welcome to our feature-rich website. <br>
       Logout:
       <form action='/logout'>

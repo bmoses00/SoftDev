@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import os
 app = Flask(__name__)
 
@@ -17,9 +17,6 @@ def main():
     try:
         if session['loggedIn']:
             return render_template("welcome.html", username = session['userUsername'])
-                                                # because they are logged in,
-                                                # their username must be the
-                                                # same as only valid one
     except:
         session['loggedIn'] = False
     return render_template("index.html",
@@ -37,6 +34,7 @@ def authenticate():
     and request.args.get('Password') == session['password']):
         session['userUsername'] = request.args.get('Username')
         session['loggedIn'] = True
+        flash("You have logged in!")
         return render_template("welcome.html", username = request.args.get('Username'))
     else:
         return render_template("error.html" # checks if user has wrong username, pass, or both
