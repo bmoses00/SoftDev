@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+{% extends "index.html" %}
 <html>
     <head>
     </head>
     <body>
-      <p>Hello, {{username}}! Welcome to our feature-rich website.
-
+      <p>
+      {% block content %}
+      Hello, {{username}}! Welcome to our feature-rich website. <br>
       Logout:
       <form action='/logout'>
       <input type = "submit" value = "Logout" />
       </form></p>
+      {% endblock %}
     </body>
 </html>

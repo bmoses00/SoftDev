@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% block head %}
+        <title>{% block title %}{% endblock %} Our Webpage</title>
+        <h1>Inherited Logins by team Chick'n Portenders</h1>
+        <h2>Period 2 Mykolyk softdev assignment #16</h2>
+        <hr>
+        {% endblock %}
     </head>
     <body>
-      <form action = "\auth" method = "GET">
-        Username:
-        <br>
-        <input type = "text" name = "Username">
-        <br>
-        Password:
-        <br>
-        <input type = "text" name = "Password">
-        <input type = "submit" value = "Submit">
-      </form>
+        {% block content %}
+          <form action = "\auth" method = "GET">
+              Username:
+              <br>
+              <input type = "text" name = "Username">
+              <br>
+              Password:
+              <br>
+              <input type = "text" name = "Password">
+              <input type = "submit" value = "Submit">
+          </form>
+          {% endblock %}
+          {% block footer %} <hr>
+          &copy; Copyright 2019 by <a href="https://github.com/IanHF/SoftDevWorkshop/tree/master">Hannah Fried, and Brian Moses</a>.
+          {% endblock %}
     </body>
 </html>
