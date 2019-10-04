@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+<html>
+    <head>
+    </head>
+    <body>
+      <p>
+      {% set msgs = get_flashed_messages() %}
+        {% for each in msgs %}
+          {{each}}
+        {% endfor %}
+      {% block content %} <br>
+      Hello, {{username}}! Welcome to our feature-rich website. <br>
+      Logout:
+      <form action='/logout'>
+      <input type = "submit" value = "Logout" />
+      </form></p>
+      {% endblock %}
+    </body>
+</html>
