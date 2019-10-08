@@ -6,6 +6,11 @@
 import sqlite3   #enable control of an sqlite database
 import csv       #facilitate CSV I/O
 
+with open("students.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row)
+        print(row["name"])
 
 DB_FILE="discobandit.db"
 
@@ -17,15 +22,17 @@ c = db.cursor()               #facilitate db ops
 # < < < INSERT YOUR POPULATE-THE-DB CODE HERE > > >
 
 # test SQL stmt in sqlite3 shell, save as string
-command = """
 
-CREATE TABLE table (name TEXT PRIMARY KEY, id INTEGER);
-INSERT INTO table ("Bob", 284192048);
+command = "CREATE TABLE students (name TEXT PRIMARY KEY, id INTEGER);"
+c.execute(command)
+command = "INSERT INTO students VALUES ('Bob', 2531);"
+c.execute(command)
+command = "SELECT * FROM students;"
+c.execute(command)
+print(c.fetchall())
 
 
-"""
 
-c.execute(command)    # run SQL statement
 
 #==========================================================
 
