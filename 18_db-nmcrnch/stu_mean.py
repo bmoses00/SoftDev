@@ -11,7 +11,7 @@ c = db.cursor()
 
 def put_data_in(file_path: str, table_name):
     """
-    Reads a csv file with three columns and enters into a table. Table must exist already
+    Reads a csv file with three columns and enters into a table.
 
     :param file_path: Path to csv file to enter data in. The csv should only have 3 columns
     :param table_name: Name of table
@@ -79,9 +79,9 @@ def writeToCsv():
         students.write("Byler,9001,15\n")
 
 writeToCsv()
-db.execute("CREATE TABLE IF NOT EXISTS students (name STRING, age INTERGER, id INTERGER PRIMARY KEY);")
+db.execute("CREATE TABLE students (name STRING, age INTERGER, id INTERGER PRIMARY KEY);")
 put_data_in("./data/students.csv", "students")
-db.execute("CREATE TABLE IF NOT EXISTS courses (code STRING, mark INTERGER, id INTERGER);")
+db.execute("CREATE TABLE courses (code STRING, mark INTERGER, id INTERGER);")
 put_data_in("./data/courses.csv", "courses")
 computeAverages()
 createStuAvg()
