@@ -11,8 +11,7 @@ c = db.cursor()
 
 def put_data_in(file_path: str, table_name):
     """
-    Reads a csv file with three columns and enters into a table.
-
+    Reads a csv file with three columns and enters into a table. Table must exist already
     :param file_path: Path to csv file to enter data in. The csv should only have 3 columns
     :param table_name: Name of table
     """
@@ -20,20 +19,15 @@ def put_data_in(file_path: str, table_name):
         reader = csv.DictReader(csv_file)
         for row in reader:
             values = list(row.values())
-            db.execute("INSERT INTO {} VALUES ('{}', {}, {});".format(table_name, *values))
+            c.execute("INSERT INTO {} VALUES ('{}', {}, {});".format(table_name, *values))
 
 averages = [] # 2d list containing name, id, average
 def computeAverages():
-    # gathers data about name, id, class, and class grade from db
-    command = "SELECT name, students.id, code, mark FROM students, courses WHERE students.id = courses.id;"
-    studentData = list(c.execute(command)) # converts into a list from cursor object
-
     # the code is executed for the 1st student
     currentStudent = studentData[0][0]
     sum = studentData[0][3]
     countGrades = 1
     counter = 1
-
     while (counter < len(studentData)):
         # if we have iterated past the grades for one student
         if currentStudent != studentData[counter][0]:
@@ -45,12 +39,10 @@ def computeAverages():
         countGrades += 1
         sum += studentData[counter][3]
         counter += 1
-
     # for the last student
     averages.append([studentData[counter-1][0], studentData[counter-1][1], sum / countGrades])
 
 def createStuAvg():
-    c.execute("CREATE TABLE IF NOT EXISTS stu_avg (id INTEGER PRIMARY KEY, average INTEGER);")
     for keys in averages:
         c.execute("INSERT INTO stu_avg VALUES (" + str(keys[1]) + ", " + str(keys[2]) + ");")
 
@@ -59,7 +51,7 @@ def searchForStudent(input):
         print (averages)
     else:
         for classData in studentData:
-            if input == classData[0] or int(input) == classData[1]:
+            if input == classData[0] or input == str(classData[1]):
                 print (classData)
 
 def writeToCsv():
@@ -78,13 +70,23 @@ def writeToCsv():
         students.write("Boses,354,16\n")
         students.write("Byler,9001,15\n")
 
+
+
 writeToCsv()
-db.execute("CREATE TABLE students (name STRING, age INTERGER, id INTERGER PRIMARY KEY);")
+
+c.execute("CREATE TABLE students (name STRING, age INTERGER, id INTERGER PRIMARY KEY);")
 put_data_in("./data/students.csv", "students")
-db.execute("CREATE TABLE courses (code STRING, mark INTERGER, id INTERGER);")
+c.execute("CREATE TABLE courses (code STRING, mark INTERGER, id INTERGER);")
 put_data_in("./data/courses.csv", "courses")
+
+# gathers data about name, id, class, and class grade from db
+command = "SELECT name, students.id, code, mark FROM students, courses WHERE students.id = courses.id;"
+studentData = list(c.execute(command)) # converts into a list from cursor object
 computeAverages()
+
+c.execute("CREATE TABLE stu_avg (id INTEGER PRIMARY KEY, average INTEGER);")
 createStuAvg()
+
 print("Input name or id (case sensitive). Input nothing to see all students' average")
 searchForStudent(input())
 
