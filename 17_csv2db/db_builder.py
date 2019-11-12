@@ -51,6 +51,16 @@ with open("courses.csv", "r") as file:
 # c.execute(command)
 # print(c.fetchall())
 
+# q = """
+# SELECT name, students.id, mark FROM students, courses
+# WHERE students.id = courses.id;
+# """
+#
+# foo = c.execute(q)
+#
+# for bar in foo:
+#     print (bar)
+
 #==========================================================
 
 db.commit() #save changes
