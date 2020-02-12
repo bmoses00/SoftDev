@@ -10,11 +10,9 @@ var radius = 0;
 
 var start_animate = function(e) {
 	e.preventDefault();
-	console.log(!is_running);
 	if (!is_running) {
-		animation_id = window.requestAnimationFrame(animate);
-		console.log(!is_running);
 		is_running = true;
+		animation_id = window.requestAnimationFrame(animate);
 	}
 };
 
@@ -24,30 +22,21 @@ var stop_animate = function(e) {
 };
 
 var animate = function(e) {
-	console.log(is_running);
-	if (is_running) {
-		if (is_increasing) {
-			radius++;
-		}
-		else {
-			radius--;
-		}
-		if (radius == canvas.width / 2) {
-			is_increasing = false;
-		}
-		else if (radius == 0) {
-			is_increasing = true;
-		}
-		ctx.beginPath();
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
-    	ctx.fill();
-    	ctx.closePath();
+	if (is_increasing) radius++;
+	else               radius--;
+
+	if (radius == canvas.width / 2) is_increasing = false;
+	else if (radius == 0)           is_increasing = true;
+
+	ctx.beginPath();
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
+	ctx.fill();
+	ctx.closePath();
+
+	if (is_running)
 		window.requestAnimationFrame(animate);
-	}
 }
 
 anim.addEventListener("click", start_animate);
 stop.addEventListener("click", stop_animate);
-
-
