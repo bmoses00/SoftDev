@@ -34,8 +34,7 @@ var animate = function(e) {
 	ctx.fill();
 	ctx.closePath();
 
-	if (is_running)
-		window.requestAnimationFrame(animate);
+	animation_id = window.requestAnimationFrame(animate);
 }
 
 anim.addEventListener("click", start_animate);

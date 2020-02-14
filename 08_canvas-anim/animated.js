@@ -5,7 +5,7 @@ var circle_btn = document.getElementById("animate");
 var dvd_btn = document.getElementById("corner");
 var stop = document.getElementById("stop");
 
-var logo = new Image();
+var logo = new Image(50, 50);
 logo.src = "logo_dvd.jpg"
 
 var animation_id;
@@ -40,9 +40,9 @@ var animate_circle = function(e) {
 
 var start_logo = function(e) {
 	e.preventDefault();
-
-	x = 100 + Math.random() * (canvas.width  - 200);
-	y = 100 + Math.random() * (canvas.height - 200);
+	// we want to prevent logo from spawning on edges of canvas
+	x = canvas.width  / 4 + Math.random() * (canvas.width  / 2);
+	y = canvas.height / 4 + Math.random() * (canvas.height / 2);
 
 	window.cancelAnimationFrame(animation_id);
 	animation_id = window.requestAnimationFrame(animate_logo);
@@ -50,15 +50,14 @@ var start_logo = function(e) {
 
 var animate_logo = function(e) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+	// modify location based on velocity
 	x += dx;
 	y += dy;
+	// if logo hits edge, change direction
+	if (x < 0 || x > canvas.width  - logo.width) dx = -dx;
+	if (y < 0 || y > canvas.height - logo.height) dy = -dy;
 
-	if (x < 0 || x > canvas.width  - 50) dx = -dx;
-	if (y < 0 || y > canvas.height - 50) dy = -dy;
-
-
-	ctx.drawImage(logo, x, y, 50, 50);
+	ctx.drawImage(logo, x, y, logo.width, logo.height);
 	animation_id = window.requestAnimationFrame(animate_logo);
 };
 
