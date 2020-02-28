@@ -1,0 +1,16 @@
+from pymongo import MongoClient
+import json
+
+client = MongoClient() # sets to localhost automatically
+db = client.restaurant_db
+
+col = db.restaurants
+
+with open('primer-dataset.json') as json_file:
+    file_data_string = json_file.read()
+    restaurant_dict_list = json.loads(file_data_string)
+    print(type(restaurant_dict_list))
+    print(restaurant_dict_list)
+
+    col.insert_many(restaurant_dict_list)
+
