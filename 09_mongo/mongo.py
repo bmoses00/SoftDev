@@ -1,3 +1,8 @@
+#Brian Moses
+#SoftDev pd 2
+#k09 -- Mongo
+#2020-02-27
+
 from pymongo import MongoClient
 
 client = MongoClient() # sets to localhost automatically
