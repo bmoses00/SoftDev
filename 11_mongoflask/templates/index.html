@@ -3,13 +3,53 @@
     <head>
     </head>
     <body>
-      Gross results:
+      Get movies by gross:
       <form action = "\gross_results" method = "GET">
         <input type = "text" name = "gross">
         <input type = "submit" value = "Submit">
+      </form> <br> <br>
+
+      Get movies by rating:
+      <form action = "\ratings_results" method = "GET">
+        IMDB: <input type = "text" name = "imdb"> <br>
+        Rotten Tomatoes: <input type = "text" name = "rotten_tomatoes">
+        <input type = "submit" value = "Submit"> <br>
+      </form> <br>
+
+      Get movies by year:
+      <form action = "\year_results" method = "GET">
+        <input type = "text" name = "year"> <br>
+        <input type = "submit" value = "Submit"> <br>
       </form>
+
+      Get movies by genre:
+      <form action = "\genre_results" method = "GET">
+        <input type = "text" name = "genre"> <br>
+        <input type = "submit" value = "Submit"> <br>
+      </form>
+
       {% if gross %}
-        {{ gross}}
+        {% for i in gross %}
+            <b>{{i['Title']}}</b>: {{i['US_Gross']}} <br> <br>
+        {% endfor %}
+      {% endif %}
+
+      {% if ratings %}
+      {% for i in ratings %}
+          <b>{{i['Title']}}</b>: IMDB - {{i['IMDB_Rating']}}, Rotten Tomatoes - {{i["Rotten_Tomatoes_Rating"]}} <br> <br>
+      {% endfor %}
+      {% endif %}
+
+      {% if year %}
+      {% for i in year %}
+          <b>{{i['Title']}}</b>: {{i['Release_Date']}} <br> <br>
+      {% endfor %}
+      {% endif %}
+
+      {% if genre %}
+      {% for i in genre %}
+          <b>{{i['Title']}}</b>: {{i['Major_Genre']}} <br> <br>
+      {% endfor %}
       {% endif %}
     </body>
 </html>
