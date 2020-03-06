@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+      Gross results:
+      <form action = "\gross_results" method = "GET">
+        <input type = "text" name = "gross">
+        <input type = "submit" value = "Submit">
+      </form>
+      {% if gross %}
+        {{ gross}}
+      {% endif %}
+    </body>
+</html>
