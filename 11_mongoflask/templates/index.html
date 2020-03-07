@@ -3,30 +3,44 @@
     <head>
     </head>
     <body>
-      Get movies by gross:
+      <h2> MOVIES LIST! </h2>
+      <p> This site can let you sort by gross (revenue), year, genre, and ratings. <br>
+        Note: only one sorting category can be applied at a time. </p> <hr> <br>
+      <b>Get all movies grossing above the amount entered below (in US gross):</b>
       <form action = "\gross_results" method = "GET">
-        <input type = "text" name = "gross">
+        $<input type = "text" name = "gross">USD <br>
         <input type = "submit" value = "Submit">
       </form> <br> <br>
 
-      Get movies by rating:
+      <b>Get all movies with above the following IMDB AND Rotten Tomatoes ratings:</b>
       <form action = "\ratings_results" method = "GET">
-        IMDB: <input type = "text" name = "imdb"> <br>
-        Rotten Tomatoes: <input type = "text" name = "rotten_tomatoes">
+        IMDB: <br><input type = "number" name = "imdb"> <br>
+        Rotten Tomatoes: <br><input type = "number" name = "rotten_tomatoes"> <br>
         <input type = "submit" value = "Submit"> <br>
       </form> <br>
 
-      Get movies by year:
+      <b>Get all movies released after a given year:</b>
       <form action = "\year_results" method = "GET">
-        <input type = "text" name = "year"> <br>
+        <input type = "number" name = "year"> <br>
         <input type = "submit" value = "Submit"> <br>
-      </form>
+      </form> <br>
 
-      Get movies by genre:
+      <b>Get movies by genre:</b>
       <form action = "\genre_results" method = "GET">
         <input type = "text" name = "genre"> <br>
         <input type = "submit" value = "Submit"> <br>
-      </form>
+      </form> <br>
+
+      <b>Is your name popular?</b>
+      <p>Your name is popular if there's a director that shares your name whose movie <br>
+        has more than 1000 IMDB votes</p>
+
+      <form action = "\popular_results" method = "GET">
+        <input type = "text" name = "name"> <br>
+        <input type = "submit" value = "Submit"> <br>
+      </form> <br> <br>
+
+      {{message}} <br> <br>
 
       {% if gross %}
         {% for i in gross %}
