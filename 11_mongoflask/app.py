@@ -15,6 +15,7 @@ col = db.movies
 def landing():
     return render_template("index.html")
 
+# gets all movies grossing greater than request.args['gross']
 @app.route('/gross_results')
 def gross():
     lis = list(col.find({"US_Gross": {"$gt": int(request.args['gross'])}}))
@@ -22,6 +23,7 @@ def gross():
       message = "Showing all movies grossing greater than $" + request.args['gross'] + "USD:",
       gross = lis) #show inputted thing
 
+# gets all movies with ratings higher the specified IMDB and Rotten Tomatoes ratings
 @app.route('/ratings_results')
 def ratings():
     lis = list(
@@ -34,6 +36,7 @@ def ratings():
       message = "Showing all movies with IMDB Ratings greater than " + request.args['imdb'] + " and Rotten Tomatoes scores greater than " + request.args['rotten_tomatoes'],
       ratings = lis)
 
+# gets all movies released later than the specified year
 @app.route('/year_results')
 def year():
     lis = [movie for movie in col.find({}) if int(movie["Release_Date"][-4:]) > int(request.args['year'])]
@@ -41,6 +44,7 @@ def year():
       message = "Showing all movies released after " + request.args['year'],
       year = lis)
 
+#gets all movies of the specified genre
 @app.route('/genre_results')
 def genre():
     lis = [movie for movie in col.find({"Major_Genre": request.args['genre']})]
@@ -48,6 +52,7 @@ def genre():
       message = "Showing all movies of " + request.args['genre'] + " genre",
       genre = lis)
 
+#tells you whether there is a movie whose director shares your name that has over 1000 IMDB votes
 @app.route('/popular_results')
 def popular():
     name = request.args['name']
@@ -59,15 +64,6 @@ def popular():
     if (is_popular):
         return render_template("index.html", message = "Your name is popular!")
     return render_template("index.html", message = "Sorry, your name is not popular.")
-
-
-# def is_your_name_popular(name):
-#     movies = list(col.find({}))
-#     for movie in movies:
-#         if (movie["Director"] != None and name in movie["Director"] and movie["IMDB_Votes"] > 1000):
-#             return True
-#     return False
-
 
 if __name__ == "__main__":
         app.debug = True
