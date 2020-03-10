@@ -27,10 +27,23 @@
 
       <b>Get movies by genre:</b>
       <form action = "\genre_results" method = "GET">
-        <input type = "text" name = "genre"> <br>
+        <select name = 'genre'>
+          <option value = 'Drama'>Drama</option>
+          <option value = 'Comedy'>Comedy</option>
+          <option value = 'Musical'>Musical</option>
+          <option value = 'Thriller/Suspense'>Thriller/Suspense</option>
+          <option value = 'Adventure'>Adventure</option>
+          <option value = 'Action'>Action</option>
+          <option value = 'Romantic Comedy'>Romantic Comedy</option>
+          <option value = 'Horror'>Horror</option>
+          <option value = 'Western'>Western</option>
+          <option value = 'Documentary'>Documentary</option>
+          <option value = 'Black Comedy'>Black Comedy</option>
+          <option value = 'Concert/Performance'>Concert/Performance</option>
+        </select>
+
         <input type = "submit" value = "Submit"> <br>
       </form> <br>
-
       <b>Is your name popular?</b>
       <p>Your name is popular if there's a director that shares your name whose movie <br>
         has more than 1000 IMDB votes</p>

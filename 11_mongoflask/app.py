@@ -59,6 +59,7 @@ def year():
 #gets all movies of the specified genre
 @app.route('/genre_results')
 def genre():
+    print(request.args)
     lis = [movie for movie in col.find({"Major_Genre": request.args['genre']})]
     return render_template("index.html",
       message = "Showing all movies of " + request.args['genre'] + " genre",
