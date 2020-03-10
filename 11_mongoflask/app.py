@@ -1,27 +1,39 @@
-# Brian Moses
+# Brian Moses and Alex Thompsen
 # SoftDev1 pd 2
 # K11: mongoflask
 # 2020-03-05
 
+import json
 from pymongo import MongoClient
 from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
 client = MongoClient() # sets to localhost automatically
 db = client.MosDB
+
+client.drop_database('MosDB')
+#destroying and recreating database
+
+db = client.MosDB
 col = db.movies
+
+with open('movies.json') as json_file:
+    movies_string = json_file.read()
+    movies_list = json.loads(movies_string)
+    col.insert_many(movies_list)
 
 @app.route('/')
 def landing():
     return render_template("index.html")
 
-# gets all movies grossing greater than request.args['gross']
+# gets all movies grossing greater than gross
 @app.route('/gross_results')
 def gross():
     lis = list(col.find({"US_Gross": {"$gt": int(request.args['gross'])}}))
     return render_template("index.html",
       message = "Showing all movies grossing greater than $" + request.args['gross'] + "USD:",
       gross = lis) #show inputted thing
+    #return render_template("index.html")
 
 # gets all movies with ratings higher the specified IMDB and Rotten Tomatoes ratings
 @app.route('/ratings_results')
@@ -67,4 +79,4 @@ def popular():
 
 if __name__ == "__main__":
         app.debug = True
-        app.run()
+        app.run(host = '0.0.0.0')
