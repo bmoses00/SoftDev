@@ -1,0 +1,28 @@
+1:
+
+Since each td element has an event listener for the 'clicky' function and that function
+gives an alert for that element's innerHTML, we think that clilcking on a td will give
+a popup for its text.
+
+
+2: 
+
+We're not sure whether the innermost (td) or outermost (table) will trigger first. Mr.
+Mykolyk said in class that events travel down from root, but working with 13_svg the 
+innermost event triggered first, so we think the order is td -> tr -> table.
+
+
+3:
+
+When stopPropogation() is triggered, the propagation of events will stop and only the
+innermost event will trigger.
+
+Our thought was incorrect: we missed the 'true' parameter on the table's event listener,
+which made it so that the table's event triggered first, before the elements beneath it.
+So only the table event listener triggered.
+
+
+4:
+
+We don't think that the order of attachment matters, because to our knowledge the rules
+governing order of triggering are only based on level in the DOM.
