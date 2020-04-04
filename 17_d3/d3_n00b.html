@@ -57,5 +57,28 @@ SoftDev2 pd2
     barEnter.text(function(d) { return d; });
   -------------------------------->
 
+  <!--
+Observations:
 
-  
+d3.select looks very different from the regular getElementById
+Comparing them, d3.select gives the chart variable a '_parents' field,
+and a 'groups' array which contains another array storing div.chart.
+
+bar has no divs inside, which makes sense considering chart doesn't
+have any divs. It only has an empty NodeList.
+
+not sure what bar.data does, or bar.data(data) for that matter. data
+isn't a field of bar, and it isn't a function, so I don't how this
+works. It creates an object which has an array of 6 empty elements.
+
+barUpdate.enter() puts something in the arrays and makes them not
+empty, an rt {ownerDocument...} which contains the '__data__' element,
+corresponding to elements from the data array.
+
+barUpdate.enter().append("div") makes each of the elements contain a div,
+and each of the divs has a '__data__' element within, corresponding to the
+element from the 'data' array.
+
+the next two commands, using parameter 'd', which corresponds to the __data__
+element, format the bars.
+ -->
