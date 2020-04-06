@@ -1,0 +1,11 @@
+- thoughts on treemap example:
+
+  - .text() function, as you might expect, adds text
+  - attributes like clip-path, x, y, do what they sound
+  like they should do, not sure about fill-opacity
+  - most of it still seems like magic, there are so many
+  functions that I'm not familiar with like .ancestors(),
+  .uid(), leaves()
+
+- chart funcitonality seems pretty simple and powerful,
+fairly customizable 
