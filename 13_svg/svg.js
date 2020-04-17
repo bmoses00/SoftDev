@@ -20,6 +20,7 @@ var plot = function(e) {
 }
 
 var circle_clicked = function(e) {
+  // console.log(e.toElement.getAttribute("fill")); this for google chrome (below doesn't work in ffox)
   if (e.originalTarget.getAttribute("fill") == "blue") {
     e.originalTarget.setAttribute("fill", "cyan");
   }

@@ -19,15 +19,15 @@ var plot = function(e) {
     ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
     ctx.fill();
     ctx.closePath();
-    
+
     ctx.beginPath();
-    
+
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(e.offsetX, e.offsetY);
-    
+
     ctx.stroke();
     ctx.closePath();
-    
+
     lastX = e.offsetX;
     lastY = e.offsetY;
 };

@@ -66,8 +66,6 @@ var stop_animation = function(e) {
 	is_running = false;
 };
 
-
-
 circle_btn.addEventListener("click", start_circle);
 dvd_btn.addEventListener("click", start_logo);
 stop.addEventListener("click", stop_animation);
